@@ -1,0 +1,68 @@
+#SheHacks Challenge 1
+#Marina Liu, Emily Wei, Kristen Phan, Greeshma Rosario
+
+#import packages
+import random
+
+#test validity of user input when guessing
+def userInput():
+    while True: 
+        try:
+            userNum = int(input("Please enter an integer between " + str(rangeMin) + " and " + str(rangeMax) + " : "))
+        #test input type
+        except ValueError:
+            print("Error. Only integers are allowed")
+            continue
+        else:
+            #test if number is in range
+            if userNum < rangeMin or userNum > rangeMax:
+                print("Inputted number is not within range")
+                continue
+            else:
+                return userNum
+                break
+
+#test validity of user input for range
+def rangeMaker(message):
+    while True: 
+        try:
+            rangeInt = int(input(message))
+        #test input type
+        except ValueError:
+            print("Error. Only integers are allowed")
+            continue
+        else:
+            return rangeInt
+            break
+
+#loop until range is valid
+while True:
+    rangeMin = rangeMaker("Please enter the minimum integer for range: ")
+    rangeMax = rangeMaker("Please enter the maximum integer for range: ")
+    
+    if rangeMin > rangeMax:
+        print("Range is not valid. Minimum integer must be less than maximum integer in range")
+        continue
+    else:
+        break
+        
+#generate random number within range
+answerNum = random.randint(rangeMin, rangeMax)
+
+#prompt user to guess number
+userNum = userInput()
+
+#program responds based on user's guess
+#continue until user guesses number correctly
+while userNum != answerNum:
+    if userNum > answerNum:
+        print("Incorrect. The number is lower")
+        userNum = userInput()
+    else:
+        print("Incorrect. The number is higher")
+        userNum = userInput()
+
+#loop ends and success message is printed
+print("Congratulations! You guessed the number")
+
+#end of program
